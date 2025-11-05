@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Terminal theme base styles */
+@layer base {
+  body {
+    @apply bg-terminal-bg text-terminal-text font-terminal;
+    image-rendering: pixelated;
+  }
+  
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #00ff0040 #000000;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    @apply bg-terminal-bg;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    @apply bg-terminal-dim border border-terminal-border rounded;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-secondary;
+  }
+}
+
+/* Terminal-specific components */
+@layer components {
+  .terminal-window {
+    @apply bg-terminal-bg-secondary border border-terminal-border rounded-lg overflow-hidden shadow-neon;
+  }
+  
+  .terminal-header {
+    @apply bg-terminal-bg-tertiary border-b border-terminal-border px-4 py-2 flex items-center justify-between;
+  }
+  
+  .terminal-title {
+    @apply text-terminal-text font-bold text-sm tracking-wider uppercase;
+  }
+  
+  .terminal-body {
+    @apply p-4 font-mono text-sm;
+  }
+  
+  .terminal-input {
+    @apply bg-terminal-bg border border-terminal-border text-terminal-text px-3 py-2 rounded 
+           focus:outline-none focus:border-terminal-primary focus:shadow-neon-sm
+           placeholder-terminal-dim font-mono;
+  }
+  
+  .terminal-button {
+    @apply bg-terminal-bg border-2 border-terminal-primary text-terminal-text px-4 py-2 rounded
+           font-mono uppercase text-sm tracking-wide
+           hover:bg-terminal-primary hover:text-terminal-bg hover:shadow-neon
+           active:scale-95 transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-terminal-bg disabled:hover:text-terminal-text;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+  }
+  
+  .terminal-button-secondary {
+    @apply terminal-button border-terminal-dim hover:bg-terminal-dim;
+  }
+  
+  .terminal-badge {
+    @apply inline-block px-2 py-1 text-xs font-mono uppercase tracking-wide
+           border rounded;
+  }
+  
+  .terminal-badge-success {
+    @apply terminal-badge border-terminal-success text-terminal-success;
+  }
+  
+  .terminal-badge-error {
+    @apply terminal-badge border-terminal-error text-terminal-error;
+  }
+  
+  .terminal-badge-warning {
+    @apply terminal-badge border-terminal-warning text-terminal-warning;
+  }
+  
+  .terminal-card {
+    @apply bg-terminal-bg-secondary border border-terminal-border rounded p-4;
+  }
+  
+  .terminal-link {
+    @apply text-terminal-accent underline hover:text-terminal-primary cursor-pointer;
+  }
+  
+  .terminal-divider {
+    @apply border-t border-terminal-border my-4;
+  }
+  
+  /* Scanline effect */
+  .scanlines {
+    @apply pointer-events-none;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 255, 0, 0.02) 51%
+    );
+    background-size: 100% 4px;
+  }
+  
+  /* CRT flicker */
+  .crt-flicker {
+    animation: flicker 0.15s infinite;
+  }
+  
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+  }
+  
+  /* Command palette */
+  .command-palette {
+    @apply terminal-window fixed top-1/4 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-50;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  .border-neon {
+    @apply border-terminal-primary shadow-neon;
+  }
+  
+  .text-mono {
+    @apply font-mono;
+  }
+  
+  .terminal-gradient {
+    background: linear-gradient(180deg, #000000 0%, #0a0e14 100%);
+  }
+}
+
+/* Fix Leaflet map clickability */
+.leaflet-container {
+  cursor: crosshair !important;
+  z-index: 1 !important;
+  touch-action: auto !important;
+}
+
+.leaflet-pane {
+  z-index: 400 !important;
+}
+
+.leaflet-tile-pane {
+  z-index: 200 !important;
+}
+
+.leaflet-overlay-pane {
+  z-index: 400 !important;
+}
+
+.leaflet-shadow-pane {
+  z-index: 500 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 600 !important;
+}
+
+.leaflet-tooltip-pane {
+  z-index: 650 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 700 !important;
+}
+
+.leaflet-control-container {
+  z-index: 800 !important;
+}
+
+/* Ensure buttons are clickable */
+button {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+input, textarea, select {
+  pointer-events: auto !important;
+  z-index: 5 !important;
+}
+
+/* Fix any overlay issues */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure the root and body allow interactions */
+#root, body, html {
+  pointer-events: auto !important;
+}
